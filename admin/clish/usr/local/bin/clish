@@ -1513,9 +1513,12 @@ startnm() {
 		echo -e "${yellow}NodeManager is already running (pid: ${pid}) ${NC}"
 		return -1
 	fi
-	
-	su - isas1 -c "$ASE_DIR/nodemanager_start.sh"
-	
+	if [ `id | cut -f2 -d= | cut -f2 -d\( | cut -f1 -d\)` != 'isas1' ] ; then
+	    su - isas1 -c "${IS_HOME}/bin/nodemanager_start.sh"
+	else
+		sh "${IS_HOME}/bin/nodemanager_start.sh"
+	fi
+
 	echo -e "${green}NodeManager is starting.${NC}"
 	echo "Run 'clish --watchstartup appserver0' to monitor server startup"
 }
