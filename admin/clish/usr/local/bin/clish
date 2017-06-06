@@ -1514,7 +1514,7 @@ startnm() {
 		return -1
 	fi
 	
-	. "${IS_HOME}/bin/nodemanager_start.sh"
+	su - isas1 -c "$ASE_DIR/nodemanager_start.sh"
 	
 	echo -e "${green}NodeManager is starting.${NC}"
 	echo "Run 'clish --watchstartup appserver0' to monitor server startup"
