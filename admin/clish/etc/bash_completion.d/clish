@@ -1,0 +1,36 @@
+#!bash
+#
+# Bash completion support for Clish (the 'clish' command).
+#
+
+_clish()
+{
+    local cur prev
+
+    COMPREPLY=()
+    cur=`_get_cword`
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+	
+	case "$prev" in
+        --errors|-e|--heap|--stack|--startup|--reboot|--watchstartup|-s|-w|-r)
+            FORMATTERS=`clish --compreply appserver` 
+            COMPREPLY=( $( compgen -W '$FORMATTERS' -- "$cur" ) )
+            return 0
+            ;;
+		--dbmigrate)
+            FORMATTERS=`clish --compreply cartridges` 
+            COMPREPLY=( $( compgen -W '$FORMATTERS' -- "$cur" ) )
+            return 0
+            ;;	
+	esac
+
+    if [[ "$cur" == -* ]]; then
+        COMPREPLY=( $( compgen -W '--dbping --dbmigrate --errors \
+                                   --heap --list --multicast --orminfo \
+								   --reboot --sql --stack --startup --stop \
+								   --start --restart --watchstartup \
+								   -e -l -o -r -s -w' -- "$cur" ) )
+        return 0
+    fi
+}
+complete -F _clish -o default clish
