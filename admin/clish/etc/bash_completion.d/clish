@@ -29,7 +29,8 @@ _clish()
                                    --heap --list --multicast --orminfo \
 								   --reboot --sql --stack --startup --stop \
 								   --start --restart --watchstartup \
-								   -e -l -o -r -s -w' -- "$cur" ) )
+								   --uuid --update \
+								   -e -l -o -r -s -w -u' -- "$cur" ) )
         return 0
     fi
 }
