@@ -1178,6 +1178,8 @@ DEFINE_string 'startup' '' 'show startup log'
 DEFINE_boolean 'stop' false 'stop node manager' 
 DEFINE_boolean 'start' false 'start node manager' 
 DEFINE_boolean 'restart' false 'restart node manager' 
+DEFINE_boolean 'uuid' false 'generate uuids' 'u'
+DEFINE_boolean 'update' false 'update script'
 DEFINE_string 'watchstartup' '' 'watch interactively startup log' 'w'
 
 green='\e[0;32m'
@@ -1523,6 +1525,16 @@ startnm() {
 	echo "Run 'clish --watchstartup appserver0' to monitor server startup"
 }
 
+
+generate_uuid() {
+	cd "${IS_HOME}/tools/misc"
+	ant uuid
+}
+
+update() {
+	wget -O - https://raw.githubusercontent.com/tbouliere/intershop/master/admin/clish/install.sh | bash
+}	
+
 main()
 {
 	if [ ${FLAGS_orminfo} -eq ${FLAGS_TRUE} ]
@@ -1607,6 +1619,18 @@ main()
 	if [ ${FLAGS_dbping} -eq ${FLAGS_TRUE} ] 
 	then 
 		dbping
+		return
+	fi
+
+	if [ ${FLAGS_uuid} -eq ${FLAGS_TRUE} ] 
+	then 
+		generate_uuid
+		return
+	fi
+
+	if [ ${FLAGS_update} -eq ${FLAGS_TRUE} ] 
+	then 
+		update
 		return
 	fi
 	
