@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CLISH_VERSION="1.0"
+
 . /opt/intershop/eserver1/local/bin/environment.sh
 
 # vim:et:ft=sh:sts=2:sw=2
@@ -1180,6 +1182,7 @@ DEFINE_boolean 'start' false 'start node manager'
 DEFINE_boolean 'restart' false 'restart node manager' 
 DEFINE_boolean 'uuid' false 'generate uuids' 'u'
 DEFINE_boolean 'update' false 'update script'
+DEFINE_boolean 'version' false 'show version'
 DEFINE_string 'watchstartup' '' 'watch interactively startup log' 'w'
 
 green='\e[0;32m'
@@ -1637,6 +1640,12 @@ main()
 	if [ ! -z ${FLAGS_dbmigrate} ]
 	then
 		dbmigrate "${FLAGS_dbmigrate}"
+		return
+	fi
+
+	if [ ${FLAGS_version} -eq ${FLAGS_TRUE} ] 
+	then 
+		echo ${CLISH_VERSION}
 		return
 	fi
 
