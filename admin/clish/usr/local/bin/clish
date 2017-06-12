@@ -1182,7 +1182,7 @@ DEFINE_boolean 'start' false 'start node manager'
 DEFINE_boolean 'restart' false 'restart node manager' 
 DEFINE_boolean 'uuid' false 'generate uuids' 'u'
 DEFINE_boolean 'update' false 'update script'
-DEFINE_boolean 'version' false 'show version'
+DEFINE_boolean 'version' false 'show version' 'v'
 DEFINE_string 'watchstartup' '' 'watch interactively startup log' 'w'
 
 green='\e[0;32m'
