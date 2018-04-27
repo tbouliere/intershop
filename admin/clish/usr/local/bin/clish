@@ -1309,7 +1309,7 @@ rebootappserver() {
 	if [ -z $pid ]
 	then
 		echo -e "${yellow}$1 is not running${NC}"
-		return -1
+		return
 	fi
 	
 	echo -e "${green}Sending sighup to ${pid}${NC}"
@@ -1483,7 +1483,7 @@ stopnm() {
 	if [ -z $pid ]
 	then
 		echo -e "${yellow}NodeManager is not running${NC}"
-		return -1
+		return
 	fi
 	echo -e "${green}Stoping nodemanager with pid ${pid}${NC}"
 	
